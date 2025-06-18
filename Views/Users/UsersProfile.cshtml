@@ -1,0 +1,292 @@
+﻿@model AYOKONA.Models.StudentProfileViewModel
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 10px;
+        border: 3px solid #8B0000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .profile-header {
+        background: linear-gradient(90deg, #8B0000 0%, #b22222 100%);
+        padding: 32px 40px;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        color: #fff;
+    }
+
+    .profile-avatar {
+        width: 90px;
+        height: 90px;
+        background: #fff;
+        color: #8B0000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: bold;
+        border: 3px solid #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .profile-info h1 {
+        font-size: 32px;
+        margin: 0 0 8px 0;
+        color: #fff;
+    }
+
+    .profile-info .role {
+        font-size: 16px;
+        color: #ffe4e1;
+        margin-bottom: 10px;
+    }
+
+    .profile-buttons {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 8px 18px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-edit {
+        background: #8B0000;
+        color: #fff;
+    }
+    .btn-edit:hover {
+        background: #660000;
+    }
+    .btn-add {
+        background: #28a745;
+        color: #fff;
+    }
+    .btn-add:hover {
+        background: #218838;
+    }
+
+    .content-area {
+        padding: 40px;
+        background: #f9f9f9;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-bottom: 32px;
+    }
+
+    .info-section {
+        background: #fff;
+        border-radius: 8px;
+        padding: 28px 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        min-width: 0;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #8B0000;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .info-field {
+        margin-bottom: 0;
+    }
+
+    .info-label {
+        font-size: 12px;
+        color: #888;
+        font-weight: 600;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+    }
+
+    .info-value {
+        font-size: 15px;
+        color: #333;
+        font-weight: 500;
+        word-break: break-word;
+    }
+
+    .organizations-section {
+        grid-column: 1 / -1;
+    }
+
+    .organization-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .organization-item:last-child {
+        border-bottom: none;
+    }
+
+    .org-icon {
+        width: 38px;
+        height: 38px;
+        background: #8B0000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 18px;
+        margin-right: 14px;
+    }
+
+    .org-info {
+        flex: 1;
+    }
+
+    .org-name {
+        font-weight: 600;
+        color: #333;
+        font-size: 15px;
+    }
+
+    .org-detail {
+        font-size: 12px;
+        color: #888;
+    }
+
+    .org-status {
+        background: #28a745;
+        color: #fff;
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .add-org-btn {
+        margin-top: 10px;
+        width: 100%;
+        padding: 12px;
+        background: #fff;
+        border: 2px dashed #8B0000;
+        color: #8B0000;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    .add-org-btn:hover {
+        background: #8B0000;
+        color: #fff;
+    }
+
+    .contact-section {
+        grid-column: 1 / -1;
+        margin-top: 32px;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+    }
+
+    .update-btn {
+        background: #fff;
+        color: #8B0000;
+        padding: 10px 24px;
+        border: 2px solid #8B0000;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    .update-btn:hover {
+        background: #8B0000;
+        color: #fff;
+    }
+
+    .single-column {
+        grid-column: 1 / -1;
+    }
+
+    @@media (max-width: 900px) {
+        .container {
+            margin: 20px;
+        }
+        .content-area {
+            padding: 20px;
+        }
+        .profile-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px 20px;
+        }
+        .content-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            @(Model.FullName?.Substring(0, 1) ?? "?")
+        </div>
+        <div class="profile-info">
+            <h1>@Model.FullName</h1>
+            <div class="role">@Model.Role</div>
+            <div class="profile-buttons">
+                <button class="btn btn-edit">📝 Edit Profile</button>
+                <button class="btn btn-add">➕ Add Organization</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div class="content-grid">
+            <div class="info-section">
+                <div class="section-title">👤 Personal Information</div>
+                <div class="info-grid">
+                    <div class="info-field
